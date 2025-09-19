@@ -1,21 +1,42 @@
-package ru.zyuzyukov.kurs_3_db.db.repositories;
+package ru.zyuzyukov.kurs_3_java.db.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import ru.zyuzyukov.kurs_3_db.db.entity.Vacancy;
-import ru.zyuzyukov.kurs_3_db.db.entity.Employment;
+
+import ru.zyuzyukov.kurs_3_java.db.entity.Employment;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-public interface EmploymentRepository extends JpaRepository<Employment, UUID> {
-    List<Employment> findByWorkerId(UUID workerId);
-    @Query("SELECT e.vacancy " +
-            "FROM Employment e " +
-            "GROUP BY e.vacancy " +
-            "ORDER BY COUNT(e) DESC")
-    List<Vacancy> findVacanciesByPopularity(org.springframework.data.domain.Pageable pageable);
+public class EmploymentRepository implements JpaRepository<Employment, UUID> {
+    @Override
+    public List<Employment> findAll() {
+        return List.of();
+    }
 
+    @Override
+    public Optional<Employment> findById(UUID id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Employment save(Employment employment) {
+        return null;
+    }
+
+    @Override
+    public Employment update(Employment employment) {
+        return null;
+    }
+
+    @Override
+    public boolean existsById(UUID id) {
+        return false;
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+
+    }
 }
 
 
