@@ -1,45 +1,45 @@
-package ru.zyuzyukov.kurs_3_db.db.service;
+package ru.zyuzyukov.kurs_3_java.db.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-import ru.zyuzyukov.kurs_3_db.db.entity.Entitytable;
+import lombok.RequiredArgsConstructor;
+import ru.zyuzyukov.kurs_3_java.db.entity.Entitytable;
+import ru.zyuzyukov.kurs_3_java.db.repositories.JpaRepository;
+import ru.zyuzyukov.kurs_3_java.dto.CRUDable;
+import ru.zyuzyukov.kurs_3_java.mapper.Mapper;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
-
-public abstract class BaseService<T extends Entitytable> {
+@RequiredArgsConstructor
+public class BaseService<D extends CRUDable, T extends Entitytable> {
     private final JpaRepository<T, UUID> repository;
-
-    public BaseService(JpaRepository<T, UUID> repository) {
-        this.repository = repository;
+    private final Mapper<D, T> mapper;
+    public List<D> findAll() {
+        List<T> list = repository.findAll();
+        return list.stream().map(mapper::toDto).toList();
+    }
+    public D findById(UUID id) {
+        T entity = repository.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException("entity not found")
+        );
+        return mapper.toDto(entity);
     }
 
-    public Optional<T> findById(UUID id) {
-        return repository.findById(id);
+    public D save(D d) {
+        T entity = mapper.toCreateEntity(d);
+        T save = repository.save(entity);
+        return mapper.toDto(save);
     }
 
-    public Page<T> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
+    public D update(D d) {
+        T entity = mapper.toCreateEntity(d);
+        T save = repository.update(entity);
+        return mapper.toDto(save);
     }
 
-    public T save(T t) {
-        return repository.save(t);
-    }
-
-    public T update(T t) {
-        return repository.save(t);
-    }
-
-    public boolean delete(UUID id) {
-        if (!repository.existsById(id)) return false;
+    public void delete(UUID id) {
+        if (!repository.existsById(id)) return;
         repository.deleteById(id);
-        return true;
 
-    }
-    public long count() {
-        return repository.count();
     }
 
 
