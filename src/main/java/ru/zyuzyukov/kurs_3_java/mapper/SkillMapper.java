@@ -1,14 +1,14 @@
-package ru.zyuzyukov.kurs_3_db.mapper;
+package ru.zyuzyukov.kurs_3_java.mapper;
 
-import org.springframework.stereotype.Component;
-import ru.zyuzyukov.kurs_3_db.dto.SkillDto;
-import ru.zyuzyukov.kurs_3_db.dto.SkillDtoForVacancy;
-import ru.zyuzyukov.kurs_3_db.dto.SkillDtoForWorker;
-import ru.zyuzyukov.kurs_3_db.db.entity.Skill;
+
+import ru.zyuzyukov.kurs_3_java.db.entity.Skill;
+import ru.zyuzyukov.kurs_3_java.dto.SkillDto;
+import ru.zyuzyukov.kurs_3_java.dto.SkillDtoForVacancy;
+import ru.zyuzyukov.kurs_3_java.dto.SkillDtoForWorker;
 
 import java.util.ArrayList;
 
-@Component
+
 public class SkillMapper {
 
     public SkillDtoForVacancy toVacancyDto(Skill entity) {
