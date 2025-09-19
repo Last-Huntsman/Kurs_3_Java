@@ -1,8 +1,6 @@
-package ru.zyuzyukov.kurs_3_db.db.entity;
+package ru.zyuzyukov.kurs_3_java.db.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,27 +8,22 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@NoArgsConstructor
 @Data
 public class Employer implements Entitytable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.UUID)
+    // @Column(name = "id")
     private UUID id;
 
-    @NotBlank()
-    @Column(name = "name", length = 50, unique = true)
+    // @NotBlank()
+    // @Column(name = "name", length = 50, unique = true)
     private String name;
 
-    @NotNull
+    // @NotNull
     private Boolean active = true;
 
-    @OneToMany(mappedBy = "employer",orphanRemoval = true)
-    private List<Vacancy> vacancyList = new ArrayList<>();
-
-
+    // @OneToMany(mappedBy = "employer",orphanRemoval = true)
+    private List<UUID> vacancyList = new ArrayList<>();
 }

@@ -1,6 +1,4 @@
-package ru.zyuzyukov.kurs_3_db.db.entity;
-
-import ru.zyuzyukov.kurs_3_db.dto.CRUDable;
+package ru.zyuzyukov.kurs_3_java.db.entity;
 
 public interface Entitytable {
 
