@@ -1,4 +1,4 @@
-package ru.zyuzyukov.kurs_3_java.dto;
+package ru.zyuzyukov.kurs_3_db.dto;
 
 
 public interface CRUDable {

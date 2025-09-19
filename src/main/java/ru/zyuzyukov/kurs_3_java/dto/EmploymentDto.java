@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 
@@ -13,12 +13,14 @@ import java.util.UUID;
 @Data
 public class EmploymentDto  implements CRUDable {
 
-
+    //при создании не указываем
     private UUID id;
-
+    //не обязательный
     private UUID worker_id;
 
     private UUID vacancy_id;
-    private LocalDateTime date_open;
-    private LocalDateTime date_close;
+    //при создании не указываем
+    private LocalDate date_open;
+    // не обязательный параметр
+    private LocalDate date_close;
 }

@@ -13,12 +13,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkerDto implements CRUDable {
-
+    //при создании не указываем
     private UUID id;
 
     private String name;
 
-    private Integer experience=0;
-
     private List<UUID> workerSkillsId = new ArrayList<>();
+    private List<UUID> employmentId = new ArrayList<>();
 }
