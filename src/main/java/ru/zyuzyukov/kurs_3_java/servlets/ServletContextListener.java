@@ -1,12 +1,11 @@
 package ru.zyuzyukov.kurs_3_java.servlets;
 
 import jakarta.servlet.ServletContextEvent;
-import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import ru.zyuzyukov.kurs_3_java.application.ApplicationContext;
 
 @WebListener
-public class ServletContext implements ServletContextListener {
+public class ServletContextListener implements jakarta.servlet.ServletContextListener {
         ApplicationContext appContext;
 
     @Override

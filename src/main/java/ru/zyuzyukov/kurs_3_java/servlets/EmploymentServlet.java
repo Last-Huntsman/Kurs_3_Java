@@ -6,64 +6,60 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import ru.zyuzyukov.kurs_3_java.application.ApplicationContext;
-import ru.zyuzyukov.kurs_3_java.db.entity.Employer;
-import ru.zyuzyukov.kurs_3_java.db.repositories.EmployerRepository;
+import ru.zyuzyukov.kurs_3_java.db.entity.Employment;
 import ru.zyuzyukov.kurs_3_java.db.service.BaseService;
-import ru.zyuzyukov.kurs_3_java.dto.EmployerDto;
-import ru.zyuzyukov.kurs_3_java.mapper.EmployerMapper;
-import ru.zyuzyukov.kurs_3_java.mapper.Mapper;
+import ru.zyuzyukov.kurs_3_java.dto.EmploymentDto;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@WebServlet("/employer")
-public class EmployerServlet extends HttpServlet {
-    private final String index = "WEB-INF/views/employer.jsp";
+@WebServlet("/employment")
 
-    private BaseService<EmployerDto,Employer> service ;
-
+public class EmploymentServlet extends HttpServlet {
+    private final String index = "WEB-INF/views/employment.jsp";
+    private BaseService<EmploymentDto, Employment> service;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ApplicationContext context =
                 (ApplicationContext) config.getServletContext().getAttribute("appContext");
-        service = context.getEmployerService();
+        service = context.getEmploymentService();
 
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("EmployServlet doGet");
-        List<EmployerDto> employerDtoList = service.findAll();
-        req.setAttribute("employers", employerDtoList);
-        System.out.println(employerDtoList);
+        resp.setContentType("text/html;charset=utf-8");
+        List<EmploymentDto> employmentDtos = service.findAll();
+        req.setAttribute("employments", employmentDtos);
         req.getRequestDispatcher(index).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        String name = req.getParameter("name");
+        UUID workerId = UUID.fromString(req.getParameter("workerId"));
+        UUID vacancyId = UUID.fromString(req.getParameter("vacancyId"));
+        LocalDate dateOpen = LocalDate.parse(req.getParameter("date_open"));
+        LocalDate dateClose = LocalDate.parse(req.getParameter("date_closed"));
         switch (action) {
             case "add":
-                service.save(new EmployerDto(UUID.randomUUID(), name, new ArrayList<>(), true));
+                service.save(new EmploymentDto(UUID.randomUUID(), workerId, vacancyId, dateOpen, dateClose));
                 break;
-            case "update":
+            case "edit":
                 UUID id = UUID.fromString(req.getParameter("id"));
-                service.update(new EmployerDto(id, name, new ArrayList<>(), true));
+                service.update(new EmploymentDto(id, workerId, vacancyId, dateOpen, dateClose));
                 break;
             case "delete":
                 UUID idDelete = UUID.fromString(req.getParameter("id"));
                 service.delete(idDelete);
                 break;
         }
-
-        resp.sendRedirect(req.getContextPath() + "/employer");
+        resp.sendRedirect(req.getContextPath() + "/employment");
     }
 
 }
