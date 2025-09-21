@@ -9,7 +9,7 @@ import ru.zyuzyukov.kurs_3_java.dto.SkillDtoForWorker;
 import java.util.ArrayList;
 
 
-public class SkillMapper {
+public class SkillMapper implements Mapper<SkillDto, Skill> {
 
     public SkillDtoForVacancy toVacancyDto(Skill entity) {
         return new SkillDtoForVacancy(
@@ -57,5 +57,15 @@ public class SkillMapper {
 
     public SkillDto createDto(Skill entity) {
         return new SkillDto(entity.getId(), entity.getName());
+    }
+
+    @Override
+    public SkillDto toDto(Skill entity) {
+        return null;
+    }
+
+    @Override
+    public Skill toCreateEntity(SkillDto dto) {
+        return null;
     }
 }

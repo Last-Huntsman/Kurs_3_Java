@@ -1,11 +1,13 @@
 package ru.zyuzyukov.kurs_3_java.servlets;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import ru.zyuzyukov.kurs_3_java.application.ApplicationContext;
 import ru.zyuzyukov.kurs_3_java.db.entity.Employer;
 import ru.zyuzyukov.kurs_3_java.db.repositories.EmployerRepository;
 import ru.zyuzyukov.kurs_3_java.db.service.BaseService;
@@ -19,15 +21,20 @@ import java.util.List;
 import java.util.UUID;
 
 @WebServlet("/employer")
-
+@RequiredArgsConstructor
 public class EmployerServlet extends HttpServlet {
     private final String index = "WEB-INF/views/employer.jsp";
-    private final EmployerRepository  employerRepository = new EmployerRepository();
-    private final EmployerMapper employerMapper =new EmployerMapper();
-    private final BaseService<EmployerDto,Employer> service = new BaseService<>(employerRepository,employerMapper);
+
+    private BaseService<EmployerDto,Employer> service ;
 
 
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        ApplicationContext context = (ApplicationContext) config.getServletContext().getContext("appContext");
+        service = context.getEmployerService();
 
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
