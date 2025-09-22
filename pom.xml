@@ -55,7 +55,5 @@
     </dependencies>
 
 
-    <build>
-        <finalName>Kurs_3_Java</finalName>
-    </build>
+
 </project>
