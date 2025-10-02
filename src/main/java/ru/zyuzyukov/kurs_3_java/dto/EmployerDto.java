@@ -17,8 +17,6 @@ public class EmployerDto implements CRUDable {
     private UUID id;
 
     private String name;
-    //при создании не указываем
-    private List<UUID> vacancyList = new ArrayList<>();
 
     private Boolean active = true;
 

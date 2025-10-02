@@ -24,6 +24,4 @@ public class Employer implements Entitytable {
     // @NotNull
     private Boolean active = true;
 
-    // @OneToMany(mappedBy = "employer",orphanRemoval = true)
-    private List<UUID> vacancyList = new ArrayList<>();
 }

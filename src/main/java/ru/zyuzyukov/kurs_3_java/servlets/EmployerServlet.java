@@ -51,11 +51,11 @@ public class EmployerServlet extends HttpServlet {
         String name = req.getParameter("name");
         switch (action) {
             case "add":
-                service.save(new EmployerDto(UUID.randomUUID(), name, new ArrayList<>(), true));
+                service.save(new EmployerDto(UUID.randomUUID(), name, true));
                 break;
             case "update":
                 UUID id = UUID.fromString(req.getParameter("id"));
-                service.update(new EmployerDto(id, name, new ArrayList<>(), true));
+                service.update(new EmployerDto(id, name, true));
                 break;
             case "delete":
                 UUID idDelete = UUID.fromString(req.getParameter("id"));
