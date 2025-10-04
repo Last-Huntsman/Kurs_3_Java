@@ -14,8 +14,6 @@ public class ApplicationContext {
     private final EmployerMapper employerMapper = new EmployerMapper();
     private final EmploymentRepository employmentRepository = new EmploymentRepository(connectionManager);
     private final EmploymentMapper employmentMapper = new EmploymentMapper();
-    private final SkillRepository skillRepository = new SkillRepository(connectionManager);
-    private final SkillMapper skillMapper = new SkillMapper();
     private final VacancyRepository vacancyRepository = new VacancyRepository(connectionManager);
     private final VacancyMapper vacancyMapper = new VacancyMapper();
     private final WorkerRepository workerRepository = new WorkerRepository(connectionManager);
@@ -24,10 +22,6 @@ public class ApplicationContext {
 
     public BaseService<EmployerDto, Employer> getEmployerService() {
         return new BaseService<>(employerRepository, employerMapper);
-    }
-
-    public BaseService<SkillDto, Skill> getSkillService() {
-        return new BaseService<>(skillRepository, skillMapper);
     }
 
     public BaseService<EmploymentDto, Employment> getEmploymentService() {
