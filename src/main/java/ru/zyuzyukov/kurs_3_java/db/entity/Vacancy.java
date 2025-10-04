@@ -36,9 +36,5 @@ public class Vacancy implements Entitytable {
     // @NotNull
     private Boolean active = true;
 
-    // @ManyToMany
-    // @JoinTable(name = "vacancy_skill",
-    //     joinColumns = @JoinColumn(name = "vacancy_id"),
-    //     inverseJoinColumns = @JoinColumn(name = "skill_id"))
-    private List<UUID> vacancySkills = new ArrayList<>();
+
 }

@@ -45,11 +45,11 @@ public class VacancyServlet extends HttpServlet {
 
         switch (action) {
             case "add":
-                service.save(new VacancyDto(UUID.randomUUID(), employerId, salary, description, post, true, new ArrayList<>()));
+                service.save(new VacancyDto(UUID.randomUUID(), employerId, salary, description, post, true));
                 break;
             case "update":
                 UUID id = UUID.fromString(req.getParameter("id"));
-                service.update(new VacancyDto(id, employerId, salary, description, post, true, new ArrayList<>()));
+                service.update(new VacancyDto(id, employerId, salary, description, post, true));
                 break;
             case "delete":
                 UUID idDelete = UUID.fromString(req.getParameter("id"));

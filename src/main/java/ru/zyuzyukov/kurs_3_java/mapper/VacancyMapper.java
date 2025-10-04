@@ -20,8 +20,7 @@ public class VacancyMapper implements Mapper<VacancyDto, Vacancy> {
                 entity.getSalary(),
                 entity.getDescription(),
                 entity.getPost(),
-                entity.getActive(),
-                entity.getVacancySkills()
+                entity.getActive()
         );
     }
 
@@ -35,8 +34,7 @@ public class VacancyMapper implements Mapper<VacancyDto, Vacancy> {
                 dto.getSalary(),
                 dto.getDescription(),
                 dto.getPost(),
-                dto.getActive(),
-                dto.getVacancySkills()
+                dto.getActive()
         );
     }
 

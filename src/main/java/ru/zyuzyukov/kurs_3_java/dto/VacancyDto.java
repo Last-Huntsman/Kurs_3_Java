@@ -27,6 +27,4 @@ public class VacancyDto implements CRUDable {
 
     private Boolean active = true;
 
-    private List<UUID> vacancySkills = new ArrayList<>();
-
 }
