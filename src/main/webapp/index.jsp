@@ -14,7 +14,6 @@
     <li><a href="vacancy">Вакансии</a></li>
     <li><a href="employer">Работодатели</a></li>
     <li><a href="employment">Трудоустройство</a></li>
-    <li><a href="skill">Навыки</a></li>
     <li><a href="worker">Работники</a></li>
 </ul>
 </body>
