@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface JpaRepository<T extends Entitytable, ID> {
     List<T> findAll();
+
     Optional<T> findById(ID id);
 
     T save(T t);
