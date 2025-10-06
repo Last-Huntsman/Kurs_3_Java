@@ -11,9 +11,8 @@ public class WorkerMapper implements Mapper<WorkerDto, Worker> {
     public WorkerDto toDto(Worker entity) {
         return new WorkerDto(
                 entity.getId(),
-                entity.getName(),
-                entity.getWorkerSkills(),
-                entity.getEmployments()
+                entity.getName()
+
         );
     }
 
@@ -21,9 +20,8 @@ public class WorkerMapper implements Mapper<WorkerDto, Worker> {
     public Worker toCreateEntity(WorkerDto dto) {
         return new Worker(
                 dto.getId(),
-                dto.getName(),
-                dto.getEmploymentId(),
-                dto.getWorkerSkillsId()
+                dto.getName()
+
 
 
         );

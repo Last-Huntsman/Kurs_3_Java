@@ -23,12 +23,4 @@ public class Worker implements Entitytable {
     // @Column(name = "name", length = 50)
     private String name;
 
-    // @OneToMany(mappedBy = "worker", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UUID> employments = new ArrayList<>();
-
-    // @ManyToMany
-    // @JoinTable(name = "workers_skills",
-    //     joinColumns =@JoinColumn(name= "worker_id"),
-    //     inverseJoinColumns = @JoinColumn(name = "skill_id"))
-    private List<UUID> workerSkills = new ArrayList<>();
 }

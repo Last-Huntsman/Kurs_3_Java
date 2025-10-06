@@ -42,11 +42,11 @@ public class WorkerServlet extends HttpServlet {
 
         switch (action) {
             case "add":
-                service.save(new WorkerDto(UUID.randomUUID(), name, new ArrayList<>(), new ArrayList<>()));
+                service.save(new WorkerDto(UUID.randomUUID(), name));
                 break;
             case "update":
                 UUID id = UUID.fromString(req.getParameter("id"));
-                service.update(new WorkerDto(id, name, new ArrayList<>(), new ArrayList<>()));
+                service.update(new WorkerDto(id, name));
                 break;
             case "delete":
                 UUID idDelete = UUID.fromString(req.getParameter("id"));
