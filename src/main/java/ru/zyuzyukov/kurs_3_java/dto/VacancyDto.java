@@ -25,6 +25,6 @@ public class VacancyDto implements CRUDable {
 
     private String post;
 
-    private Boolean active = true;
+
 
 }

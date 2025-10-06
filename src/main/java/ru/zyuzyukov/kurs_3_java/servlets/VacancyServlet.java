@@ -10,9 +10,9 @@ import ru.zyuzyukov.kurs_3_java.application.ApplicationContext;
 import ru.zyuzyukov.kurs_3_java.db.entity.Vacancy;
 import ru.zyuzyukov.kurs_3_java.db.service.BaseService;
 import ru.zyuzyukov.kurs_3_java.dto.VacancyDto;
+import ru.zyuzyukov.kurs_3_java.mapper.VacancyMapper;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,12 +20,14 @@ import java.util.UUID;
 public class VacancyServlet extends HttpServlet {
     private final String index = "WEB-INF/views/vacancy.jsp";
     private BaseService<VacancyDto, Vacancy> service;
+    private VacancyMapper mapper;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ApplicationContext context = (ApplicationContext) config.getServletContext().getAttribute("appContext");
         service = context.getVacancyService();
+        mapper = context.getVacancyMapper();
     }
 
     @Override
@@ -45,11 +47,11 @@ public class VacancyServlet extends HttpServlet {
 
         switch (action) {
             case "add":
-                service.save(new VacancyDto(UUID.randomUUID(), employerId, salary, description, post, true));
+                service.save(mapper.toCreatDto(UUID.randomUUID(), employerId, salary, description, post));
                 break;
             case "update":
                 UUID id = UUID.fromString(req.getParameter("id"));
-                service.update(new VacancyDto(id, employerId, salary, description, post, true));
+                service.update(mapper.toCreatDto(id, employerId, salary, description, post));
                 break;
             case "delete":
                 UUID idDelete = UUID.fromString(req.getParameter("id"));

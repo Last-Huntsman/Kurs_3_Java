@@ -33,8 +33,6 @@ public class Vacancy implements Entitytable {
     // @Size(max = 100)
     private String post;
 
-    // @NotNull
-    private Boolean active = true;
 
 
 }

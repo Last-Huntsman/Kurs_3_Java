@@ -6,6 +6,8 @@ import ru.zyuzyukov.kurs_3_java.db.entity.Vacancy;
 
 import ru.zyuzyukov.kurs_3_java.dto.VacancyDto;
 
+import java.util.UUID;
+
 public class VacancyMapper implements Mapper<VacancyDto, Vacancy> {
 
 
@@ -19,8 +21,7 @@ public class VacancyMapper implements Mapper<VacancyDto, Vacancy> {
                 entity.getEmployerId(),
                 entity.getSalary(),
                 entity.getDescription(),
-                entity.getPost(),
-                entity.getActive()
+                entity.getPost()
         );
     }
 
@@ -33,8 +34,12 @@ public class VacancyMapper implements Mapper<VacancyDto, Vacancy> {
                 dto.getEmployerId(),
                 dto.getSalary(),
                 dto.getDescription(),
-                dto.getPost(),
-                dto.getActive()
+                dto.getPost()
+        );
+    }
+    public VacancyDto toCreatDto(UUID id, UUID employerId,Integer salary, String description,String post) {
+        return new VacancyDto(
+               id,employerId,salary,description,post
         );
     }
 

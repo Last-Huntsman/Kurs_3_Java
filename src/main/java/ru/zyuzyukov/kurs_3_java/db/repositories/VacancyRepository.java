@@ -30,8 +30,7 @@ public class VacancyRepository implements JpaRepository<Vacancy, UUID> {
                                 (UUID) set.getObject("employer_id"),
                                 set.getInt("salary"),
                                 set.getString("description"),
-                                set.getString("post"),
-                                set.getBoolean("active")
+                                set.getString("post")
                         )
                 );
             }
@@ -56,8 +55,7 @@ public class VacancyRepository implements JpaRepository<Vacancy, UUID> {
                                 (UUID) set.getObject("employer_id"),
                                 set.getInt("salary"),
                                 set.getString("description"),
-                                set.getString("post"),
-                                set.getBoolean("active")
+                                set.getString("post")
                         )
                 );
             }
@@ -71,14 +69,13 @@ public class VacancyRepository implements JpaRepository<Vacancy, UUID> {
     public Vacancy save(Vacancy vacancy) {
         try(var connection = connectionManager.open()){
             PreparedStatement statement = connection.prepareStatement("INSERT into vacancy " +
-                    "(id,employer_id,salary,description,post,active) values" +
-                    " ( ?,?,?,?,?,? )");
+                    "(id,employer_id,salary,description,post) values" +
+                    " ( ?,?,?,?,? )");
             statement.setObject(1,vacancy.getId());
             statement.setObject(2,vacancy.getEmployerId());
             statement.setInt(3,vacancy.getSalary());
             statement.setString(4,vacancy.getDescription());
             statement.setString(5,vacancy.getPost());
-            statement.setBoolean(6,vacancy.getActive());
 
             statement.executeUpdate();
             return findById(vacancy.getId()).orElseThrow(()-> new SQLException("vacancy not save"));
@@ -91,13 +88,12 @@ public class VacancyRepository implements JpaRepository<Vacancy, UUID> {
     @Override
     public Vacancy update(Vacancy vacancy) {
         try(var connection = connectionManager.open()){
-            PreparedStatement statement = connection.prepareStatement("UPDATE vacancy SET employer_id =?,salary =?,description=?,post=?,active=? where id= ? ");
-            statement.setObject(6,vacancy.getId());
+            PreparedStatement statement = connection.prepareStatement("UPDATE vacancy SET employer_id =?,salary =?,description=?,post=? where id= ? ");
+            statement.setObject(5,vacancy.getId());
             statement.setObject(1,vacancy.getEmployerId());
             statement.setInt(2,vacancy.getSalary());
             statement.setString(3,vacancy.getDescription());
             statement.setString(4,vacancy.getPost());
-            statement.setBoolean(5,vacancy.getActive());
 
             statement.executeUpdate();
             return findById(vacancy.getId()).orElseThrow(()-> new SQLException("vacancy not update"));
