@@ -2,6 +2,9 @@ package ru.zyuzyukov.kurs_3_java.mapper;
 
 import ru.zyuzyukov.kurs_3_java.db.entity.Employer;
 import ru.zyuzyukov.kurs_3_java.dto.EmployerDto;
+import ru.zyuzyukov.kurs_3_java.dto.WorkerDto;
+
+import java.util.UUID;
 
 
 public class EmployerMapper implements Mapper<EmployerDto, Employer> {
@@ -10,8 +13,7 @@ public class EmployerMapper implements Mapper<EmployerDto, Employer> {
     public EmployerDto toDto(Employer entity) {
         return new EmployerDto(
                 entity.getId(),
-                entity.getName(),
-                entity.getActive());
+                entity.getName());
     }
 
     @Override
@@ -19,9 +21,11 @@ public class EmployerMapper implements Mapper<EmployerDto, Employer> {
 
         return new Employer(
                 dto.getId(),
-                dto.getName(),
-                dto.getActive()
-
+                dto.getName()
         );
+    }
+
+    public EmployerDto createDto(UUID id, String name) {
+        return new EmployerDto(id, name);
     }
 }

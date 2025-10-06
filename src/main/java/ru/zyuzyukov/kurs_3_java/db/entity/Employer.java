@@ -21,7 +21,6 @@ public class Employer implements Entitytable {
     // @Column(name = "name", length = 50, unique = true)
     private String name;
 
-    // @NotNull
-    private Boolean active = true;
+
 
 }

@@ -18,7 +18,6 @@ public class EmployerDto implements CRUDable {
 
     private String name;
 
-    private Boolean active = true;
 
 
 

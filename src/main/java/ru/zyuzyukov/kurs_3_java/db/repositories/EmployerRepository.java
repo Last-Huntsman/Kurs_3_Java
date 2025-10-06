@@ -22,7 +22,7 @@ public class EmployerRepository implements JpaRepository<Employer, UUID> {
             ResultSet set = statement.executeQuery();
             List<Employer> employers = new ArrayList<>();
             while (set.next()) {
-                employers.add(new Employer((UUID) set.getObject("id"), set.getString("name"), set.getBoolean("active")));
+                employers.add(new Employer((UUID) set.getObject("id"), set.getString("name")));
             }
             return employers;
         } catch (SQLException e) {
@@ -37,7 +37,7 @@ public class EmployerRepository implements JpaRepository<Employer, UUID> {
             statement.setObject(1, id);
             ResultSet set = statement.executeQuery();
             if (set.next()) {
-                return Optional.of(new Employer(id, set.getString("name"), set.getBoolean("active")));
+                return Optional.of(new Employer(id, set.getString("name")));
             }
             return Optional.empty();
 
@@ -50,10 +50,10 @@ public class EmployerRepository implements JpaRepository<Employer, UUID> {
     public Employer save(Employer employer) {
         try (var connection = connectionManager.open()) {
             PreparedStatement statement = connection.prepareStatement("INSERT into employer " +
-                    "(id,name,active) values ( ?,?,? )");
+                    "(id,name) values ( ?,? )");
             statement.setObject(1, employer.getId());
             statement.setString(2, employer.getName());
-            statement.setBoolean(3, employer.getActive());
+
             statement.executeUpdate();
             return findById(employer.getId()).orElseThrow(()-> new SQLException("Employer not save"));
         } catch (SQLException e) {
@@ -65,10 +65,10 @@ public class EmployerRepository implements JpaRepository<Employer, UUID> {
     public Employer update(Employer employer) {
         try (var connection = connectionManager.open()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE employer " +
-                    "SET name = ?, active = ? WHERE id = ?");
+                    "SET name = ? WHERE id = ?");
             statement.setString(1, employer.getName());
-            statement.setBoolean(2, employer.getActive());
-            statement.setObject(3, employer.getId());
+
+            statement.setObject(2, employer.getId());
             statement.executeUpdate();
             return findById(employer.getId()).orElseThrow(()-> new SQLException("Employer not update"));
         } catch (SQLException e) {

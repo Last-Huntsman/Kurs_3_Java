@@ -13,6 +13,7 @@ import ru.zyuzyukov.kurs_3_java.db.repositories.EmployerRepository;
 import ru.zyuzyukov.kurs_3_java.db.service.BaseService;
 import ru.zyuzyukov.kurs_3_java.dto.EmployerDto;
 import ru.zyuzyukov.kurs_3_java.mapper.EmployerMapper;
+import ru.zyuzyukov.kurs_3_java.mapper.EmploymentMapper;
 import ru.zyuzyukov.kurs_3_java.mapper.Mapper;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class EmployerServlet extends HttpServlet {
     private final String index = "WEB-INF/views/employer.jsp";
 
     private BaseService<EmployerDto,Employer> service ;
+    private EmployerMapper mapper;
 
 
     @Override
@@ -33,6 +35,7 @@ public class EmployerServlet extends HttpServlet {
         ApplicationContext context =
                 (ApplicationContext) config.getServletContext().getAttribute("appContext");
         service = context.getEmployerService();
+        mapper =context.getEmployerMapper();
 
     }
 
@@ -51,11 +54,11 @@ public class EmployerServlet extends HttpServlet {
         String name = req.getParameter("name");
         switch (action) {
             case "add":
-                service.save(new EmployerDto(UUID.randomUUID(), name, true));
+                service.save(mapper.createDto(UUID.randomUUID(),name));
                 break;
             case "update":
                 UUID id = UUID.fromString(req.getParameter("id"));
-                service.update(new EmployerDto(id, name, true));
+                service.update(mapper.createDto(id,name));
                 break;
             case "delete":
                 UUID idDelete = UUID.fromString(req.getParameter("id"));
