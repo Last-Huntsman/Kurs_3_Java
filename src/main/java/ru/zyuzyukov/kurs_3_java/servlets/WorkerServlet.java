@@ -10,6 +10,7 @@ import ru.zyuzyukov.kurs_3_java.application.ApplicationContext;
 import ru.zyuzyukov.kurs_3_java.db.entity.Worker;
 import ru.zyuzyukov.kurs_3_java.db.service.BaseService;
 import ru.zyuzyukov.kurs_3_java.dto.WorkerDto;
+import ru.zyuzyukov.kurs_3_java.mapper.WorkerMapper;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,12 +21,13 @@ import java.util.UUID;
 public class WorkerServlet extends HttpServlet {
     private final String index = "WEB-INF/views/worker.jsp";
     private BaseService<WorkerDto, Worker> service;
-
+    private WorkerMapper mapper;
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ApplicationContext context = (ApplicationContext) config.getServletContext().getAttribute("appContext");
         service = context.getWorkerService();
+        mapper = context.getWorkerMapper();
     }
 
     @Override
@@ -42,11 +44,11 @@ public class WorkerServlet extends HttpServlet {
 
         switch (action) {
             case "add":
-                service.save(new WorkerDto(UUID.randomUUID(), name));
+                service.save(mapper.createDto(UUID.randomUUID(), name));
                 break;
             case "update":
                 UUID id = UUID.fromString(req.getParameter("id"));
-                service.update(new WorkerDto(id, name));
+                service.update(mapper.createDto(id, name));
                 break;
             case "delete":
                 UUID idDelete = UUID.fromString(req.getParameter("id"));

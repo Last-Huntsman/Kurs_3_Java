@@ -4,6 +4,8 @@ package ru.zyuzyukov.kurs_3_java.mapper;
 import ru.zyuzyukov.kurs_3_java.db.entity.Worker;
 import ru.zyuzyukov.kurs_3_java.dto.WorkerDto;
 
+import java.util.UUID;
+
 
 public class WorkerMapper implements Mapper<WorkerDto, Worker> {
 
@@ -21,9 +23,9 @@ public class WorkerMapper implements Mapper<WorkerDto, Worker> {
         return new Worker(
                 dto.getId(),
                 dto.getName()
-
-
-
         );
+    }
+    public WorkerDto createDto(UUID id,String name){
+        return new WorkerDto(id,name);
     }
 }
