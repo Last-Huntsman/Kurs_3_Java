@@ -53,17 +53,18 @@ public class EmployerServlet extends HttpServlet {
         String action = req.getParameter("action");
         String name = req.getParameter("name");
         switch (action) {
-            case "add":
-                service.save(mapper.createDto(UUID.randomUUID(),name));
-                break;
-            case "update":
+            case "add"-> {
+                service.save(mapper.createDto(UUID.randomUUID(), name));
+            }
+            case "update"-> {
                 UUID id = UUID.fromString(req.getParameter("id"));
-                service.update(mapper.createDto(id,name));
-                break;
-            case "delete":
-                UUID idDelete = UUID.fromString(req.getParameter("id"));
-                service.delete(idDelete);
-                break;
+                service.update(mapper.createDto(id, name));
+
+            }
+            case "delete"-> {
+                UUID id = UUID.fromString(req.getParameter("id"));
+                service.delete(id);
+            }
         }
 
         resp.sendRedirect(req.getContextPath() + "/employer");

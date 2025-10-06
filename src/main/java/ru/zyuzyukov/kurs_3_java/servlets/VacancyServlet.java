@@ -46,17 +46,18 @@ public class VacancyServlet extends HttpServlet {
         UUID employerId = UUID.fromString(req.getParameter("employerId"));
 
         switch (action) {
-            case "add":
+            case "add"-> {
                 service.save(mapper.toCreatDto(UUID.randomUUID(), employerId, salary, description, post));
-                break;
-            case "update":
+            }
+            case "update"-> {
                 UUID id = UUID.fromString(req.getParameter("id"));
                 service.update(mapper.toCreatDto(id, employerId, salary, description, post));
-                break;
-            case "delete":
-                UUID idDelete = UUID.fromString(req.getParameter("id"));
-                service.delete(idDelete);
-                break;
+            }
+            case "delete"-> {
+                UUID id= UUID.fromString(req.getParameter("id"));
+                service.delete(id);
+            }
+
         }
 
         resp.sendRedirect(req.getContextPath() + "/vacancy");

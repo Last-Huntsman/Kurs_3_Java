@@ -16,11 +16,11 @@ public class EmploymentDto  implements CRUDable {
     //при создании не указываем
     private UUID id;
     //не обязательный
-    private UUID worker_id;
+    private UUID workerId;
 
-    private UUID vacancy_id;
+    private UUID vacancyId;
     //при создании не указываем
     private LocalDate date_open;
     // не обязательный параметр
-    private LocalDate date_close;
+    private LocalDate date_closed;
 }

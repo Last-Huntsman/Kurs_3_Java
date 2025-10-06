@@ -5,6 +5,7 @@ import ru.zyuzyukov.kurs_3_java.db.entity.Employment;
 import ru.zyuzyukov.kurs_3_java.dto.EmploymentDto;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 public class EmploymentMapper implements Mapper<EmploymentDto, Employment> {
@@ -26,11 +27,16 @@ public class EmploymentMapper implements Mapper<EmploymentDto, Employment> {
 
         return new Employment(
                 dto.getId(),
-                dto.getWorker_id(),
-                dto.getVacancy_id(),
-                dto.getDate_close(),
-                LocalDate.now()
+                dto.getWorkerId(),
+                dto.getVacancyId(),
+                dto.getDate_open(),
+                dto.getDate_closed()
+        );
+    }
 
+    public EmploymentDto createDto(UUID id,UUID workerId, UUID vacancyId,LocalDate open, LocalDate closed) {
+        return new EmploymentDto(
+              id,workerId,vacancyId,open,closed
         );
     }
 }
