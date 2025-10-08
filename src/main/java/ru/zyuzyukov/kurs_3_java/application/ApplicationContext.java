@@ -10,7 +10,7 @@ import ru.zyuzyukov.kurs_3_java.mapper.*;
 
 public class ApplicationContext {
 
-    private final ConnectionManager connectionManager = new ConnectionManager();
+    private final ConnectionManager connectionManager = ConnectionManager.getInstance();
     private final EmployerRepository employerRepository = new EmployerRepository(connectionManager);
     @Getter
     private final EmployerMapper employerMapper = new EmployerMapper();

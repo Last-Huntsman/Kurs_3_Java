@@ -19,7 +19,6 @@ public final class DBProperties {
         return INSTANCE.getProperty(key);
     }
     private DBProperties() {
-
     }
 }
 
